@@ -1,0 +1,23 @@
+sudo: false
+language: java
+jdk:
+  - oraclejdk8
+dist: trusty
+cache:
+  directories:
+    - $HOME/build/sknopp/bamboo-chuck-norris-plugin/opt/atlassian-plugin-sdk
+before_install:
+  - wget https://marketplace.atlassian.com/download/plugins/atlassian-plugin-sdk-tgz
+  - rm -rf opt download
+  - mkdir -p opt
+  - mkdir -p download
+  - tar -xvzf *plugin-sdk* -C download
+  - mv download/*plugin-sdk* opt/atlassian-plugin-sdk
+  - chmod a+x opt/atlassian-plugin-sdk/bin/*
+  - chmod a+x opt/atlassian-plugin-sdk/apache-maven-*/bin/*
+  - export PATH=opt/atlassian-plugin-sdk/bin:opt/atlassian-plugin-sdk/apache-maven-*/bin:$PATH
+  - atlas-version
+install:
+  - atlas-mvn install > /dev/null
+script:
+  - atlas-package
