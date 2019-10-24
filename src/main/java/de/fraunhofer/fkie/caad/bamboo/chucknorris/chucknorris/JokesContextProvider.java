@@ -4,6 +4,7 @@ import com.atlassian.plugin.PluginParseException;
 import com.atlassian.plugin.web.ContextProvider;
 import com.atlassian.sal.api.ApplicationProperties;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
@@ -111,6 +112,9 @@ public class JokesContextProvider implements ContextProvider {
 
     @Override
     public Map<String, Object> getContextMap(Map<String, Object> map) {
+        if(map == null){
+            map = new HashMap<>();
+        }
         int rnd = new Random().nextInt(jokes.length);
         map.put("joke", jokes[rnd]);
         return map;
