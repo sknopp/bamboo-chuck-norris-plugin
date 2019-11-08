@@ -18,11 +18,11 @@
     <packaging>atlassian-plugin</packaging>
 
     <properties>
-        <bamboo.version>6.8.0</bamboo.version>
-        <bamboo.data.version>6.8.0</bamboo.data.version>
+        <bamboo.version>6.9.2</bamboo.version>
+        <bamboo.data.version>6.9.2</bamboo.data.version>
         <amps.version>8.0.2</amps.version>
         <plugin.testrunner.version>2.0.1</plugin.testrunner.version>
-        <atlassian.spring.scanner.version>1.2.13</atlassian.spring.scanner.version>
+        <atlassian.spring.scanner.version>2.1.13</atlassian.spring.scanner.version>
         <!-- This property ensures consistency between the key in atlassian-plugin.xml and the OSGi bundle's key. -->
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -42,14 +42,7 @@
             <groupId>com.atlassian.plugin</groupId>
             <artifactId>atlassian-spring-scanner-annotation</artifactId>
             <version>${atlassian.spring.scanner.version}</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.atlassian.plugin</groupId>
-            <artifactId>atlassian-spring-scanner-runtime</artifactId>
-            <version>${atlassian.spring.scanner.version}</version>
-            <scope>runtime</scope>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -164,7 +157,9 @@
                         </dependency>
                     </scannedDependencies>
                     <verbose>false</verbose>
-                    <includeExclude>-com.atlassian.plugin.spring.scanner.annotation.*</includeExclude>
+                    <includeExclude>
+                        -com.atlassian.plugin.spring.scanner.annotation.*
+                    </includeExclude>
                 </configuration>
             </plugin>
         </plugins>
