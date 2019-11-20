@@ -13,6 +13,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -21,6 +23,9 @@ import static org.junit.matchers.JUnitMatchers.containsString;
 
 @RunWith(AtlassianPluginsTestRunner.class)
 public class BuildResultSeleniumTest {
+
+    private static final Logger log = LoggerFactory.getLogger(BuildResultSeleniumTest.class);
+
     private final ApplicationProperties applicationProperties;
     private final MyPluginComponent pluginComponent;
     private static WebDriver driver;
@@ -51,7 +56,11 @@ public class BuildResultSeleniumTest {
 
     @AfterClass
     public static void closeWebDriver(){
-        driver.close();
+        try {
+            driver.close();
+        }catch(Throwable t){
+            log.error("Selenium WebDriver could not be closed normally: ", t);
+        }
     }
 
     @Test
