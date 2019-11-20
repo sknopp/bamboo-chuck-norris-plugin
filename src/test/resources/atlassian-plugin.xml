@@ -10,5 +10,12 @@
 
     <!-- from the product container -->
     <component-import key="applicationProperties" interface="com.atlassian.sal.api.ApplicationProperties" />
-    
+
+    <taskType key="task.testsuccess" name="Successful Task" class="it.de.fraunhofer.fkie.caad.bamboo.chucknorris.TaskSuccessful">
+        <description>A task that prints 'Hello, World! and succeeds'</description>
+    </taskType>
+    <taskType key="task.testfailing" name="Failing Task" class="it.de.fraunhofer.fkie.caad.bamboo.chucknorris.TaskFailing">
+        <description>A task that prints 'Hello, World! and fails'</description>
+    </taskType>
+
 </atlassian-plugin>
