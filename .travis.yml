@@ -15,7 +15,7 @@ cache:
     - $HOME/build/sknopp/bamboo-chuck-norris-plugin/opt/atlassian-plugin-sdk
 before_install:
   - wget -q https://marketplace.atlassian.com/download/plugins/atlassian-plugin-sdk-tgz
-  - rm -rf opt download
+  - rm -rf opt download geckodriver
   - mkdir -p opt
   - mkdir -p download
   - tar -xzf *plugin-sdk* -C download
@@ -23,6 +23,10 @@ before_install:
   - chmod a+x opt/atlassian-plugin-sdk/bin/*
   - chmod a+x opt/atlassian-plugin-sdk/apache-maven-*/bin/*
   - atlas-version $MAVEN_OPTS
+  - wget https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-linux64.tar.gz
+  - mkdir -p geckodriver
+  - tar -xzf geckodriver-v0.26.0-linux64.tar.gz -C geckodriver
+  - export PATH=$PATH:$PWD/geckodriver
 install:
   - atlas-mvn integration-test $MAVEN_OPTS
   - atlas-mvn install $MAVEN_OPTS
