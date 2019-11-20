@@ -6,24 +6,25 @@ dist: trusty
 env:
   global:
     - MOZ_HEADLESS=1
+    - MAVEN_OPTS="-Dorg.slf4j.simpleLogger.defaultLogLevel=warn --batch-mode"
+    - PATH=opt/atlassian-plugin-sdk/bin:opt/atlassian-plugin-sdk/apache-maven-*/bin:$PATH
 addons:
   firefox: latest
 cache:
   directories:
     - $HOME/build/sknopp/bamboo-chuck-norris-plugin/opt/atlassian-plugin-sdk
 before_install:
-  - wget https://marketplace.atlassian.com/download/plugins/atlassian-plugin-sdk-tgz
+  - wget -q https://marketplace.atlassian.com/download/plugins/atlassian-plugin-sdk-tgz
   - rm -rf opt download
   - mkdir -p opt
   - mkdir -p download
-  - tar -xvzf *plugin-sdk* -C download
+  - tar -xzf *plugin-sdk* -C download
   - mv download/*plugin-sdk* opt/atlassian-plugin-sdk
   - chmod a+x opt/atlassian-plugin-sdk/bin/*
   - chmod a+x opt/atlassian-plugin-sdk/apache-maven-*/bin/*
-  - export PATH=opt/atlassian-plugin-sdk/bin:opt/atlassian-plugin-sdk/apache-maven-*/bin:$PATH
-  - atlas-version
+  - atlas-version $MAVEN_OPTS
 install:
-  - atlas-mvn integration-test
-  - atlas-mvn install > /dev/null
+  - atlas-mvn integration-test $MAVEN_OPTS
+  - atlas-mvn install $MAVEN_OPTS
 script:
-  - atlas-package
+  - atlas-package $MAVEN_OPTS
