@@ -1,11 +1,11 @@
 <html>
     <body>
         #if ($resultSummary.isFailed())
-            <img src="${webResourceManager.getStaticResourcePrefix()}/download/resources/de.fraunhofer.fkie.caad.bamboo.chucknorris:chucknorris-resources/images/alert.jpg" />
+            <img id="chucknorris_img" src="${webResourceManager.getStaticResourcePrefix()}/download/resources/de.fraunhofer.fkie.caad.bamboo.chucknorris:chucknorris-resources/images/alert.jpg" />
         #elseif ($resultSummary.isSuccessful())
-            <img src="${webResourceManager.getStaticResourcePrefix()}/download/resources/de.fraunhofer.fkie.caad.bamboo.chucknorris:chucknorris-resources/images/thumb_up.jpg" />
+            <img id="chucknorris_img" src="${webResourceManager.getStaticResourcePrefix()}/download/resources/de.fraunhofer.fkie.caad.bamboo.chucknorris:chucknorris-resources/images/thumb_up.jpg" />
         #else
-            <img src="${webResourceManager.getStaticResourcePrefix()}/download/resources/de.fraunhofer.fkie.caad.bamboo.chucknorris:chucknorris-resources/images/bad_ass.jpg" />
+            <img id="chucknorris_img" src="${webResourceManager.getStaticResourcePrefix()}/download/resources/de.fraunhofer.fkie.caad.bamboo.chucknorris:chucknorris-resources/images/bad_ass.jpg" />
         #end
         <br />
         <b>$joke</b>
