@@ -83,11 +83,10 @@ public class BuildResultSeleniumTest {
 
         WebElement runBuild_btn = driver.findElement(By.id("manualBuild_LRP-LRP"));
 
-        WebDriverWait wait = new WebDriverWait(driver, 60);
-        wait.until(ExpectedConditions.visibilityOf(runBuild_btn));
-        runBuild_btn.click();
+        actions.moveToElement(runBuild_btn).click().perform();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 
+        WebDriverWait wait = new WebDriverWait(driver, 60);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("chucknorris_img")));
         WebElement image = driver.findElement(By.id("chucknorris_img"));
         assertThat(image.getAttribute("src"), containsString("bad_ass.jpg"));
