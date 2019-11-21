@@ -12,6 +12,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,6 +45,8 @@ public class BuildResultSeleniumTest {
             return;
         }
         driver = new FirefoxDriver();
+        driver.manage().window().setPosition(new Point(0,0));
+        driver.manage().window().setSize(new Dimension(1920,1080));
     }
 
     private void authenticate(){
@@ -77,6 +80,8 @@ public class BuildResultSeleniumTest {
         actions.moveToElement(driver.findElement(By.cssSelector(".aui-buttons > .aui-button:nth-child(1)"))).click().perform();
         driver.findElement(By.id("manualBuild_LRP-LRP")).click();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        WebDriverWait wait = new WebDriverWait(driver, 60);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("chucknorris_img")));
         WebElement image = driver.findElement(By.id("chucknorris_img"));
         assertThat(image.getAttribute("src"), containsString("bad_ass.jpg"));
     }
@@ -88,6 +93,8 @@ public class BuildResultSeleniumTest {
             authenticate();
         }
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        WebDriverWait wait = new WebDriverWait(driver, 60);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("chucknorris_img")));
         WebElement image = driver.findElement(By.id("chucknorris_img"));
         assertThat(image.getAttribute("src"), containsString("thumb_up.jpg"));
     }
@@ -99,6 +106,8 @@ public class BuildResultSeleniumTest {
             authenticate();
         }
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        WebDriverWait wait = new WebDriverWait(driver, 60);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("chucknorris_img")));
         WebElement image = driver.findElement(By.id("chucknorris_img"));
         assertThat(image.getAttribute("src"), containsString("alert.jpg"));
     }
