@@ -69,6 +69,11 @@ public class BuildResultSeleniumTest {
         if(driver.getCurrentUrl().contains("userlogin!doDefault.action")) {
             authenticate();
         }
+        WebElement infobox_btn;
+        try {
+            infobox_btn = driver.findElement(By.linkText("Don\'t remind me again"));
+            infobox_btn.click();
+        }catch(Throwable ignored){};
         driver.findElement(By.cssSelector(".aui-buttons > .aui-button:nth-child(1)")).click();
         driver.findElement(By.id("manualBuild_LRP-LRP")).click();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
