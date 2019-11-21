@@ -72,15 +72,22 @@ public class BuildResultSeleniumTest {
             authenticate();
         }
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
         try {
             ((JavascriptExecutor) driver).executeScript("return document.getElementsByClassName(\"aui-message aui-message-warning warning closeable shadowed\")[0].remove();");
             driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         }catch(Throwable ignored){};
+
         Actions actions = new Actions(driver);
         actions.moveToElement(driver.findElement(By.cssSelector(".aui-buttons > .aui-button:nth-child(1)"))).click().perform();
-        driver.findElement(By.id("manualBuild_LRP-LRP")).click();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+
+        WebElement runBuild_btn = driver.findElement(By.id("manualBuild_LRP-LRP"));
+
         WebDriverWait wait = new WebDriverWait(driver, 60);
+        wait.until(ExpectedConditions.visibilityOf(runBuild_btn));
+        runBuild_btn.click();
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("chucknorris_img")));
         WebElement image = driver.findElement(By.id("chucknorris_img"));
         assertThat(image.getAttribute("src"), containsString("bad_ass.jpg"));
