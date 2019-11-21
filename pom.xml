@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.fraunhofer.fkie.caad.bamboo</groupId>
     <artifactId>chucknorris</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <organization>
         <name>Fraunhofer FKIE</name>
