@@ -8,10 +8,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,10 +67,8 @@ public class BuildResultSeleniumTest {
             authenticate();
         }
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        WebElement infobox_btn;
         try {
-            infobox_btn = driver.findElement(By.className("dismiss-notification"));
-            infobox_btn.click();
+            ((JavascriptExecutor) driver).executeScript("return document.getElementsByClassName(\"aui-message aui-message-warning warning closeable shadowed\")[0].remove();");
         }catch(Throwable ignored){};
         driver.findElement(By.cssSelector(".aui-buttons > .aui-button:nth-child(1)")).click();
         driver.findElement(By.id("manualBuild_LRP-LRP")).click();
